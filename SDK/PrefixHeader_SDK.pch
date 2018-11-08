@@ -1,0 +1,67 @@
+//
+//  PrefixHeader_SDK.pch
+//  SDK
+//
+//  Created by Cer on 2018/11/8.
+//  Copyright © 2018 Cer. All rights reserved.
+//
+
+#ifndef PrefixHeader_SDK_pch
+#define PrefixHeader_SDK_pch
+
+#ifdef __OBJC__ // 防止非OC文件包含OC的头文件而引发的编译报错
+// OC相关的应该在这里包含
+// #import "Tools.h"  // OC的工具类
+
+// frame相关
+#define kScreenHeight [[UIScreen mainScreen] bounds].size.height // 物理屏幕高度
+#define kScreenWidth [[UIScreen mainScreen] bounds].size.width   // 物理屏幕宽度
+#define kIsFullScreen ((([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0f) && ([[[[UIApplication sharedApplication] delegate] window] safeAreaInsets].bottom > 0.0))? YES : NO) // 判断是否全面屏
+#define kIsiPhoneX CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) // 判断是否是iPhone X
+#define kStatusBarHeight (kIsFullScreen ? 44.f : 20.f)       // 状态栏高度
+#define kNavigationBarHeight (kIsFullScreen ? 88.f : 64.f)   // 导航栏高度
+#define kTabBarHeight (kIsFullScreen? (49.f + 34.f) : 49.f)  // tabBar高度
+#define kHomeIndicatorHeight (kIsFullScreen ? 34.f : 0.f)    // home指示器高度
+
+// 颜色相关
+#define kRGBA255(R, G, B, A) [UIColor colorWithRed:((R) / 255.0f) green:((G) / 255.0f) blue:((B) / 255.0f) alpha:(A)]
+#define kRGBA(R, G, B, A) [UIColor colorWithRed:(R) green:(G) blue:(B) alpha:(A)]
+#define kRGB255(R, G, B) [UIColor colorWithRed:((R) / 255.0f) green:((G) / 255.0f) blue:((B) / 255.0f) alpha:1.0f]
+#define kRGB(R, G, B) [UIColor colorWithRed:(R) green:(G) blue:(B) alpha:1.0f]
+#define kUIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0] // 0xf8ff格式（16进制格式）
+#define UIColorFronHSB(h, s, b) [UIColor colorWithHue:h saturation:s brightness:b alpha:1.0f]
+#define UIColorFronHSBA(h, s, b, a) [UIColor colorWithHue:h saturation:s brightness:b alpha:a]
+
+// 定义通用颜色
+#define kBlackColor         [UIColor blackColor]
+#define kDarkGrayColor      [UIColor darkGrayColor]
+#define kLightGrayColor     [UIColor lightGrayColor]
+#define kWhiteColor         [UIColor whiteColor]
+#define kGrayColor          [UIColor grayColor]
+#define kRedColor           [UIColor redColor]
+#define kGreenColor         [UIColor greenColor]
+#define kBlueColor          [UIColor blueColor]
+#define kCyanColor          [UIColor cyanColor]
+#define kYellowColor        [UIColor yellowColor]
+#define kMagentaColor       [UIColor magentaColor]
+#define kOrangeColor        [UIColor orangeColor]
+#define kPurpleColor        [UIColor purpleColor]
+#define kClearColor         [UIColor clearColor]
+
+// 路径相关
+#define kDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] // 获取沙盒Document路径
+#define kTempPath NSTemporaryDirectory() // 获取沙盒temp路径
+#define kCachePath [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] // 获取沙盒Cache路径
+
+#define kWeakSelf(x) __weak typeof(self) x = self     // 弱引用
+#define kStrongSelf(x) __strong typeof(self) x = self // 强引用
+
+#ifdef DEBUG
+#define kLog(...) NSLog(__VA_ARGS__)
+#else
+#define kLog(...)
+#endif
+
+#endif
+
+#endif /* PrefixHeader_SDK_pch */
