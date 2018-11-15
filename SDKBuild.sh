@@ -7,7 +7,7 @@
 #  Copyright © 2018 Cer. All rights reserved.
 
 # 要build的target名
-TARGET_NAME=${PROJECT_NAME}
+TARGET_NAME="${PROJECT_NAME}"
 
 # 存放Framework的路径路径
 OUTPUT_FOLDER="${SRCROOT}/${PROJECT_NAME}/"
@@ -39,9 +39,9 @@ cp -R "${OUTPUT_FOLDER}/${TARGET_NAME}.framework" "${DEMO_FOLDER}"
 
 # 删除编译之后生成的无关的配置文件
 dir_path="${OUTPUT_FOLDER}/${TARGET_NAME}.framework/"
-for file in $(ls ${dir_path})
+for file in $(ls "${dir_path}"|tr " " "?") # 解决名字带空格的问题
 do
-if [[ ${file} =~ ".xcconfig" ]]
+if [[ "${file}" =~ ".xcconfig" ]]
 then
 rm -f "${dir_path}/${file}"
 fi
