@@ -39,7 +39,7 @@ cp -R "${OUTPUT_FOLDER}/${TARGET_NAME}.framework" "${DEMO_FOLDER}"
 
 # 删除编译之后生成的无关的配置文件
 dir_path="${OUTPUT_FOLDER}/${TARGET_NAME}.framework/"
-for file in ls $dir_path
+for file in $(ls ${dir_path})
 do
 if [[ ${file} =~ ".xcconfig" ]]
 then
