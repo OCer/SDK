@@ -35,10 +35,12 @@ fi
 removeBuild # 编译前先删除之前留下来的，防止干扰
 
 # 分别编译模拟器和真机的Framework
-xcodebuild -configuration "${CONFIG}" -target "${TARGET_NAME}" -sdk iphoneos clean build
-xcodebuild -configuration "${CONFIG}" -target "${TARGET_NAME}" -sdk iphonesimulator clean build
+xcodebuild -configuration "${CONFIG}" -target "${TARGET_NAME}" -sdk iphoneos clean
+xcodebuild -configuration "${CONFIG}" -target "${TARGET_NAME}" -sdk iphonesimulator clean
+xcodebuild -configuration "${CONFIG}" -target "${TARGET_NAME}" -sdk iphoneos build
+xcodebuild -configuration "${CONFIG}" -target "${TARGET_NAME}" -sdk iphonesimulator build
 
-# 判断IPHONE_DIR和SIMULATOR_DIR是否存在，存在就是编译成功
+# 判断IPHONE_DIR和SIMULATOR_DIR是否存在，存在就可能是编译成功
 if [[ -d "${IPHONE_DIR}" && -d "${SIMULATOR_DIR}" ]]
 then
 # 删除之前的Framework文件
