@@ -52,6 +52,7 @@ rm -rf "${DEMO_FOLDER}/${TARGET_NAME}.framework"
 cp -R "${IPHONE_DIR}" "${OUTPUT_FOLDER}"
 
 # 合并Framework
+lipo "${SIMULATOR_DIR}/${TARGET_NAME}" -remove arm64 -output "${SIMULATOR_DIR}/${TARGET_NAME}" # Xcode12开始，模拟器版本也有arm64，会导致合并失败，所以需要先移除了
 lipo -create "${IPHONE_DIR}/${TARGET_NAME}" "${SIMULATOR_DIR}/${TARGET_NAME}" -output "${OUTPUT_FOLDER}/${TARGET_NAME}.framework/${TARGET_NAME}"
 
 # 删除编译之后生成的无关的配置文件
